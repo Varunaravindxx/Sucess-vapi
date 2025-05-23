@@ -37,18 +37,11 @@ def get_job_description():
     return "\n".join(lines).strip()
 
 def generate_questions(job_description):
-    """Generate interview questions based on job description."""
-    sample_questions = [
-        "Can you describe your experience with web development technologies mentioned in the job description?",
-        "How do you approach debugging and solving coding challenges in web projects?",
-        "Tell me about a web development project you’ve worked on.",
-        "What front-end and back-end skills make you a good fit for this role?",
-        "How do you stay updated with web development trends and frameworks?"
-    ]
-    return sample_questions
+    """Return an empty list as questions will be generated dynamically by the assistant."""
+    return []
 
 def create_assistant(job_description, questions):
-    """Create a Vapi assistant for the interview."""
+    """Create a Vapi assistant for the interview with dynamic question generation."""
     assistant_config = {
         "name": "WebDev_Interview_Assistant",
         "firstMessage": "Hello! I'm conducting the interview for the web development position.",
@@ -62,9 +55,9 @@ def create_assistant(job_description, questions):
             Your role is to:
             - Ask the candidate to begin the interview.
             - Ask the candidate to introduce themselves.
-            - Ask the candidate the following questions one by one: {', '.join(questions)}.
-            - Wait for the candidate's response (up to 30 seconds) before proceeding.
-            - Be polite, professional, and encouraging.
+            - Generate 5 dynamic interview questions tailored to the job description. The questions should be relevant to the skills, experience, and responsibilities outlined in the job description. For example, if the job requires proficiency in JavaScript and React, ask about specific experiences or challenges with these technologies.
+            - Ask the generated questions one by one, waiting for the candidate's response (up to 30 seconds) before proceeding to the next question.
+            - Be polite, professional, and encouraging throughout the interview.
             - After all questions, thank the candidate and end the session.
             - Do not evaluate answers; only collect responses.
             """
@@ -407,7 +400,7 @@ def main():
         job_description = get_job_description()
         
         # Step 2: Generate questions
-        print("Generating interview questions...")
+        print("Configuring assistant to generate dynamic questions...")
         questions = generate_questions(job_description)
         
         # Step 3: Create the assistant
